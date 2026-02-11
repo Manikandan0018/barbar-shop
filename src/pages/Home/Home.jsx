@@ -6,7 +6,6 @@ import '../../App.css'
 import homeim from "../../image/barbar-home.webp";
 
 
-import ScrollVelocity from "../../components/ScrollVelocity";
 
 export const Home = () => {
   const textRef = useRef(null);
@@ -50,11 +49,7 @@ export const Home = () => {
         </div>
       </div>
 
-      <ScrollVelocity
-        texts={["Rainbow", "confidence start with Great Hair Cut"]}
-        velocity={100}
-        className="custom-scroll-text"
-      />
+     
     </>
   );
 };
