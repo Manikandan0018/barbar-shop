@@ -27,7 +27,8 @@ This project focuses on smooth interactions, clean layout design, and engaging a
 
 ## 📸 Preview
 
-(Add screenshots here after deployment)
+<img width="1899" height="907" alt="image" src="https://github.com/user-attachments/assets/bc293ccf-4215-49b9-84c8-cf6e34f56d8d" />
+
 
 ---
 
