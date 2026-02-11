@@ -1,9 +1,10 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import '../../App.css'
 
-import homeim2 from "../../image/shop-1.jpg";
-import homeim from "../../image/barbar-home.jpg";
+import homeim from "../../image/barbar-home.webp";
+
 
 import ScrollVelocity from "../../components/ScrollVelocity";
 
@@ -31,13 +32,10 @@ export const Home = () => {
       <div className="h-screen relative overflow-hidden">
         <img
           src={homeim}
-          className="absolute inset-0 w-full h-full object-cover z-0 hidden lg:block"
+          className="absolute inset-0 w-full h-full object-cover z-0 "
         />
 
-        <img
-          src={homeim2}
-          className="absolute inset-0 w-full h-full object-cover z-0 block lg:hidden"
-        />
+        
 
         <div className="absolute inset-0 z-10 bg-linear-to-b from-black/80 via-black/10 to-black/30"></div>
 

@@ -4,6 +4,16 @@ html {
   scroll-behavior: smooth;
 }
 
+.hero-image {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hero-image.loaded {
+  opacity: 1;
+}
+
+
 
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
