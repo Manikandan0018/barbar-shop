@@ -23,8 +23,11 @@ const Gallery = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ✅ Disable heavy animation on mobile (VERY COMMON PRODUCTION RULE)
-      if (window.innerWidth < 768) return;
+      // ✅ Disable horizontal GSAP animation on mobile
+      if (window.innerWidth < 768) {
+        ScrollTrigger.killAll(); // extra safety
+        return;
+      }
 
       const getScrollAmount = () => {
         const scrollWidth = scrollRef.current.scrollWidth;
@@ -33,7 +36,7 @@ const Gallery = () => {
 
       const amountToScroll = getScrollAmount();
 
-      // ✅ SINGLE shared tween (CRITICAL FIX)
+      // ✅ Single shared tween (critical for smoothness)
       const horizontalTween = gsap.to(scrollRef.current, {
         x: -amountToScroll,
         ease: "none",
@@ -43,11 +46,11 @@ const Gallery = () => {
           end: `+=${amountToScroll}`,
           pin: true,
           scrub: 1,
-          invalidateOnRefresh: true, // ✅ handles resize/orientation
+          invalidateOnRefresh: true,
         },
       });
 
-      // ✅ Item animations using SAME tween
+      // ✅ Item animations tied to SAME tween
       gsap.utils.toArray(".gallery-item").forEach((item) => {
         gsap.from(item, {
           opacity: 0,
@@ -61,7 +64,6 @@ const Gallery = () => {
         });
       });
 
-      // ✅ Important for mobile rotations / resize
       ScrollTrigger.refresh();
     }, triggerRef);
 
@@ -69,62 +71,82 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div ref={triggerRef} className="bg-[#050505] overflow-hidden">
-      <section className="h-screen flex items-center relative">
+    <div
+      ref={triggerRef}
+      className="bg-[#050505] overflow-x-hidden" // ✅ CRITICAL FIX
+    >
+      <section className="min-h-screen flex items-center relative">
+        {" "}
+        {/* ✅ safer than h-screen */}
         {/* Background Text */}
-        <div className="absolute top-10 left-10 overflow-hidden">
+        <div className="absolute top-10 left-6 md:left-10">
           <h2 className="text-[15vw] font-black text-white/5 uppercase leading-none select-none">
             GALLERY
           </h2>
         </div>
-
-        {/* Horizontal Scroll Container */}
+        {/* ================= MOBILE LAYOUT ================= */}
+        <div className="md:hidden flex flex-col gap-6 px-4 py-20 w-full">
+          {images.map((img) => (
+            <div key={img.id} className="w-full h-[320px]">
+              <img
+                src={img.url}
+                alt={img.title}
+                className="w-full h-full object-cover rounded-md"
+                draggable="false"
+              />
+              <div className="">
+                <span className="text-amber-500 text-xs uppercase">
+                  {img.category}
+                </span>
+                <h3 className="text-white text-lg font-bold uppercase">
+                  {img.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* ================= DESKTOP LAYOUT ================= */}
         <div
           ref={scrollRef}
-          className="flex gap-6 md:gap-12 px-[6vw] md:px-[10vw] items-center"
+          className="hidden md:flex gap-12 px-[10vw] items-center"
         >
           {images.map((img) => (
             <div
               key={img.id}
               className="gallery-item group relative flex-shrink-0
-                         w-[85vw] sm:w-[70vw] md:w-[450px]
-                         h-[55vh] sm:h-[50vh] md:h-[550px]"
+                         w-[450px] h-[550px]"
             >
-              {/* Image Frame */}
-              <div className="w-full h-full overflow-hidden rounded-sm border border-white/10">
+              <div className="w-full h-full overflow-hidden border border-white/10">
                 <img
                   src={img.url}
                   alt={img.title}
                   draggable="false"
                   className="
                     w-full h-full object-cover
-                    md:scale-110 md:group-hover:scale-100
+                    scale-110 group-hover:scale-100
                     transition-transform duration-700 ease-out
-                    md:grayscale md:hover:grayscale-0
+                    grayscale hover:grayscale-0
                   "
                 />
               </div>
 
-              {/* Label */}
-              <div className="absolute -bottom-10 left-0 w-full flex justify-between items-end opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute -bottom-10 left-0 w-full flex justify-between">
                 <div>
-                  <span className="text-amber-500 font-mono text-xs uppercase">
+                  <span className="text-amber-500 text-xs uppercase">
                     {img.category}
                   </span>
-                  <h3 className="text-white text-lg md:text-2xl font-bold uppercase">
+                  <h3 className="text-white text-2xl font-bold uppercase">
                     {img.title}
                   </h3>
                 </div>
-                <div className="text-white/20 text-2xl md:text-4xl italic">
-                  0{img.id}
-                </div>
+                <div className="text-white/20 text-4xl italic">0{img.id}</div>
               </div>
             </div>
           ))}
 
           {/* CTA */}
-          <div className="flex-shrink-0 w-[60vw] md:w-[40vw] pl-6 md:pl-20">
-            <h3 className="text-white text-2xl md:text-4xl font-light leading-tight">
+          <div className="flex-shrink-0 w-[40vw] pl-20">
+            <h3 className="text-white text-4xl font-light leading-tight">
               Ready for your <br />
               <span className="italic text-amber-500 underline underline-offset-4">
                 New Identity?
