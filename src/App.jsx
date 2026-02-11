@@ -7,6 +7,7 @@ import About from "./pages/About/About";
 import Gallery from "./pages/Gallery/Gallery";
 import Pricing from "./pages/Pricing/Pricing";
 import Header from "./pages/Header/Header";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,7 +31,7 @@ function App() {
   return (
     <>
       <section>
-        <Header/>
+        <Header />
       </section>
       <section id="home">
         <Home />
@@ -49,6 +50,9 @@ function App() {
       </section>
       <section id="about">
         <About />
+      </section>
+      <section id="contact">
+        <Contact/>
       </section>
     </>
   );
