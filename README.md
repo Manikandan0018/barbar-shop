@@ -28,6 +28,8 @@ This project focuses on smooth interactions, clean layout design, and engaging a
 ## 📸 Preview
 
 <img width="1899" height="907" alt="image" src="https://github.com/user-attachments/assets/bc293ccf-4215-49b9-84c8-cf6e34f56d8d" />
+<img width="380" height="823" alt="image" src="https://github.com/user-attachments/assets/18001f3f-b1b4-40cf-8aad-6ec06e097499" />
+
 
 
 ---
