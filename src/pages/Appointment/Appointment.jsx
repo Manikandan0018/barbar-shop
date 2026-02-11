@@ -121,9 +121,41 @@ const Appointment = () => {
             </div>
 
             {/* BUTTON */}
-            <button className="form-item w-full group relative overflow-hidden bg-amber-500 text-black font-bold py-3 sm:py-4 rounded-lg transition-transform hover:scale-[1.02] active:scale-95 text-sm sm:text-base">
-              <span className="relative z-10">CONFIRM APPOINTMENT</span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            <button
+              className="
+    w-full
+    relative overflow-hidden
+    bg-amber-500 text-black font-bold
+    rounded-lg
+
+    py-3 px-4
+    sm:py-4 sm:px-6
+    md:py-4 md:px-8
+
+    text-sm
+    sm:text-base
+    md:text-lg
+
+    transition-all duration-200
+    hover:scale-[1.02]
+    active:scale-95
+
+    flex items-center justify-center
+  "
+            >
+              <span className="relative z-10 whitespace-nowrap">
+                CONFIRM APPOINTMENT
+              </span>
+
+              <div
+                className="
+      absolute inset-0
+      bg-white/20
+      translate-y-full
+      hover:translate-y-0
+      transition-transform duration-300
+    "
+              ></div>
             </button>
 
             <p className="form-item text-center text-[10px] sm:text-xs text-zinc-500">
